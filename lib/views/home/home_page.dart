@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(children: [
             
             ElevatedButton(onPressed: (){
-              deslogar();
+              logout();
             }, child: const Text('Deslogar'))
           ]),
         )
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  deslogar()async {
+  Future<void> logout()async {
 
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

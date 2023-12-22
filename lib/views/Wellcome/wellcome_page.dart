@@ -3,14 +3,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thunnar_app/views/home/home_page.dart';
 import 'package:thunnar_app/views/login/login_page.dart';
 
-class BemVindoPage extends StatefulWidget {
-  const BemVindoPage({super.key});
+class WellcomePage extends StatefulWidget {
+  const WellcomePage({super.key});
 
   @override
-  BemVindoPageState createState() => BemVindoPageState();
+  WellcomePageState createState() => WellcomePageState();
 }
 
-class BemVindoPageState extends State<BemVindoPage> {
+class WellcomePageState extends State<WellcomePage> {
 
 
   @override
