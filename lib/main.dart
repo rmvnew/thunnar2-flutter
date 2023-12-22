@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thunnar_app/views/Wellcome/wellcome_page.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await _clearSharedPreferences();
   runApp(const MyApp());
+}
+
+Future<void> _clearSharedPreferences() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+  print("SharedPreferences cleared");
 }
 
 class MyApp extends StatelessWidget {
