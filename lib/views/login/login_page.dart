@@ -95,9 +95,12 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       if (response.statusCode == 200) {
+
+        
         var token = json.decode(response.body)['access_token'];
         await sharedPreferences.setString('token', 'Bearer $token');
-
+        await sharedPreferences.setString('body_login', response.body);
+       
         if (!mounted) return;
 
         Navigator.pushReplacement(context,
