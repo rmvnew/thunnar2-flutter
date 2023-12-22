@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thunnar_app/common/constants.dart';
 import 'package:thunnar_app/views/Wellcome/wellcome_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,12 +84,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
-
-
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('http://192.168.0.121:3000/api/v1/auth/login');
+      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.login);
 
       var response = await http.post(url, body: {
         'email': _emailController.text,
@@ -115,13 +114,14 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-     const SnackBar(
-        backgroundColor: Colors.redAccent,
-        content: Text('Não foi possível conectar ao servidor. Tente novamente mais tarde.'),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text(
+              'Não foi possível conectar ao servidor. Tente novamente mais tarde.'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 }
