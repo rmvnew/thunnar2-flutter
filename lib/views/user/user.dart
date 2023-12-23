@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thunnar_app/common/constants.dart';
 import 'package:thunnar_app/services/api_service.dart';
@@ -26,7 +27,8 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
   }
 
   void _search() async {
-    final users = await fetchUsers(ApiConstants.user, _token, search: 'user_name=$_query');
+    final users = await fetchUsers(ApiConstants.user, _token,
+        search: 'user_name=$_query');
     setState(() {
       _users = users;
     });
@@ -36,7 +38,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Buscar Usuários'),
+        title: const Text('Buscar Usuários'),
       ),
       body: Column(
         children: <Widget>[
@@ -52,7 +54,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
               decoration: InputDecoration(
                 labelText: 'Buscar',
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                   onPressed: _search,
                 ),
               ),
@@ -70,11 +72,25 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
               return ListTile(
                 title: Text(userName),
                 subtitle: Text(userEmail),
+                onTap: () {
+                  toast(userName);
+                },
               );
             },
           )),
         ],
       ),
+    );
+  }
+
+  toast(String userName) async {
+    Fluttertoast.showToast(
+      msg: userName,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.grey[800],
+      textColor: Colors.white,
     );
   }
 }

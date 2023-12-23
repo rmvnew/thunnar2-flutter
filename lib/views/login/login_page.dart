@@ -15,13 +15,28 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _senhaController = TextEditingController();
+  final _emailController = TextEditingController(text: 'sysadmin@email.com');
+  final _senhaController = TextEditingController(text: '12345');
   bool _verSenha = false;
+  
 
   @override
   Widget build(BuildContext context) {
+    bool isDesktop = MediaQuery.of(context).size.width > 600;
     return Scaffold(
+     
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(isDesktop ? 200 : 70), // Altura para desktop e móvel.
+          child: AppBar(
+            elevation: 0, // Remove a sombra/elevação do AppBar.
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/logo_thunnar.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
       body: Center(
           child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
